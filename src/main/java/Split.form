@@ -23,12 +23,12 @@
       </vspacer>
       <component id="1fd81" class="javax.swing.JTextField" binding="txtFolder">
         <constraints>
-          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="1" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
         <properties>
-          <text value="/home/mark/Documents/labeldrop"/>
+          <text value="c:\users\mark\documents\labels\split\sorgente\"/>
         </properties>
       </component>
       <component id="5cd22" class="javax.swing.JButton" binding="btnSplit">
@@ -54,7 +54,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="/home/mark/Documents/labels/"/>
+          <text value="c:\users\mark\documents\labels\split\estratte\"/>
         </properties>
       </component>
       <component id="36503" class="javax.swing.JLabel">
@@ -72,7 +72,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="/home/mark/Documents/singlelabels/"/>
+          <text value="c:\users\mark\documents\labels\split\frammenti\"/>
         </properties>
       </component>
       <component id="72d38" class="javax.swing.JButton" binding="btnUnisci">
