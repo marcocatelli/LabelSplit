@@ -2,6 +2,7 @@
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.graphics.image.LosslessFactory;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.pdfbox.rendering.PDFRenderer;
@@ -83,23 +84,36 @@ public class Split {
                 PDDocument doc = new PDDocument();
 
                 final File folder = new File(txtFragments.getText());
-                for (File file:folder.listFiles()){
-                    try {
-                        BufferedImage bim = ImageIO.read(file);
-                        int height = bim.getHeight();
-                        int width = bim.getWidth();
-                        if (width>450 && height>850){
-                            PDPage page = new PDPage();
-                            doc.addPage(page);
-                            PDImageXObject pdImageXObject = LosslessFactory.createFromImage(doc, bim);
-                            PDPageContentStream contentStream = new PDPageContentStream(doc, page, true, false);
+                for (File file:folder.listFiles()) {
+                    if (!file.getName().toLowerCase().endsWith(".pdf")){
+                        try {
+                            BufferedImage bim = ImageIO.read(file);
+                            int height = bim.getHeight();
+                            int width = bim.getWidth();
 
+                            if (width > 450 && height > 850) {
+                                float fWidth = 155.6182166418F;
+                                float fHeight = 283.4645669291F;
+                                PDRectangle rectangle = new PDRectangle(fWidth, fHeight);
+                                PDPage page = new PDPage(rectangle);
+                                doc.addPage(page);
+                                PDImageXObject pdImageXObject = LosslessFactory.createFromImage(doc, bim);
+                                PDPageContentStream contentStream = new PDPageContentStream(doc, page);
+                                contentStream.drawImage(pdImageXObject, 0, 0, fWidth, fHeight);
+                                contentStream.close();
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                    } catch (IOException e) {
-                        e.printStackTrace();
                     }
-
                 }
+                try {
+                    doc.save(txtFragments.getText()+"combined.pdf");
+                    doc.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
     }
